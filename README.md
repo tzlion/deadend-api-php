@@ -1,11 +1,15 @@
-twitter-api-php
+deadend-api-php
 ===============
 
-Simple PHP Wrapper for Twitter API v1.1 calls
+Simple PHP Wrapper for X/Twitter API v1.1 and v2 calls
 
-[![Total Downloads](https://img.shields.io/packagist/dt/j7mbo/twitter-api-php.svg)](https://packagist.org/packages/j7mbo/twitter-api-php)
-[![Build Status](https://travis-ci.org/J7mbo/twitter-api-php.svg?branch=master)](https://travis-ci.org/J7mbo/twitter-api-php)
-[![Version](https://badge.fury.io/gh/j7mbo%2Ftwitter-api-php.svg)](https://packagist.org/packages/j7mbo/twitter-api-php)
+Forked from [J7mbo/twitter-api-php](https://github.com/J7mbo/twitter-api-php) to allow the continued operation of some personal projects.
+
+**This library is not supported and v2 functionality has only been tested for certain limited use cases.**
+**I do not recommend you develop against the X/Twitter API in general due to the instability of the platform and its management.**
+
+Original documentation follows - may be outdated
+------------------------------------------------
 
 **[Changelog](https://github.com/J7mbo/twitter-api-php/wiki/Changelog)** ||
 **[Examples](https://github.com/J7mbo/twitter-api-php/wiki/Twitter-API-PHP-Wiki)** ||

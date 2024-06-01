@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Twitter-API-PHP : Simple PHP wrapper for the v1.1 API
+ * Deadend-API-PHP : Simple PHP wrapper for the v1.1 and v2 API
  * 
  * PHP version 5.3.10
  * 
- * @category Awesomeness
- * @package  Twitter-API-PHP
+ * @package  Deadend-API-PHP
  * @author   James Mallison <me@j7mbo.co.uk>
+ * @author   taizou
  * @license  MIT License
- * @version  1.0.4
- * @link     http://github.com/j7mbo/twitter-api-php
+ * @version  0.1.0
+ * @link     http://github.com/tzlion/deadend-api-php
  */
 class TwitterAPIExchange
 {
