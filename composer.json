@@ -22,10 +22,5 @@
     ],
     "autoload": {
         "classmap": ["TwitterAPIExchange.php"]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
     }
 }
