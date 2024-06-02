@@ -9,7 +9,7 @@
  * @author   James Mallison <me@j7mbo.co.uk>
  * @author   taizou
  * @license  MIT License
- * @version  0.1.0
+ * @version  0.2.0
  * @link     http://github.com/tzlion/deadend-api-php
  */
 class TwitterAPIExchange
@@ -38,6 +38,11 @@ class TwitterAPIExchange
      * @var array
      */
     private $postfields;
+
+    /**
+     * @var bool
+     */
+    private $jsonPost = false;
 
     /**
      * @var string
@@ -102,13 +107,16 @@ class TwitterAPIExchange
      * Set postfields array, example: array('screen_name' => 'J7mbo')
      *
      * @param array $array Array of parameters to send to API
+     * @param bool $json Send post data as JSON for v2 API
      *
      * @throws \Exception When you are trying to set both get and post fields
      *
      * @return TwitterAPIExchange Instance of self for method chaining
      */
-    public function setPostfields(array $array, $v2 = false)
+    public function setPostfields(array $array, $json = false)
     {
+        $this->jsonPost = $json;
+
         if (!is_null($this->getGetfield())) 
         { 
             throw new Exception('You can only choose get OR post fields (post fields include put).');
@@ -132,7 +140,7 @@ class TwitterAPIExchange
         // rebuild oAuth
         if (isset($this->oauth['oauth_signature']))
         {
-            $this->buildOauth($this->url, $this->requestMethod, $v2);
+            $this->buildOauth($this->url, $this->requestMethod);
         }
 
         return $this;
@@ -202,7 +210,7 @@ class TwitterAPIExchange
      *
      * @return \TwitterAPIExchange Instance of self for method chaining
      */
-    public function buildOauth($url, $requestMethod, $v2 = false)
+    public function buildOauth($url, $requestMethod)
     {
         if (!in_array(strtolower($requestMethod), array('post', 'get', 'put', 'delete')))
         {
@@ -243,7 +251,7 @@ class TwitterAPIExchange
         
         $postfields = $this->getPostfields();
 
-        if (!is_null($postfields) && !$v2) {
+        if (!is_null($postfields) && !$this->jsonPost) {
             foreach ($postfields as $key => $value) {
                 $oauth[$key] = $value;
             }
@@ -271,7 +279,7 @@ class TwitterAPIExchange
      * 
      * @return string json If $return param is true, returns json data.
      */
-    public function performRequest($return = true, $curlOptions = array(), $v2 = false)
+    public function performRequest($return = true, $curlOptions = array())
     {
         if (!is_bool($return))
         {
@@ -283,7 +291,7 @@ class TwitterAPIExchange
         $getfield = $this->getGetfield();
         $postfields = $this->getPostfields();
         
-        if ($v2 && !is_null($postfields)) {
+        if ($this->jsonPost && !is_null($postfields)) {
             $header[] = 'Content-Type:application/json';
         }
 
@@ -302,7 +310,7 @@ class TwitterAPIExchange
 
         if (!is_null($postfields))
         {
-            if ($v2) {
+            if ($this->jsonPost) {
                 $options[CURLOPT_POSTFIELDS] =  json_encode($postfields);
             } else {
                 $options[CURLOPT_POSTFIELDS] = http_build_query($postfields, '', '&');
