@@ -8,8 +8,10 @@ Forked from [J7mbo/twitter-api-php](https://github.com/J7mbo/twitter-api-php) to
 **This library is not supported and v2 functionality has only been tested for certain limited use cases.**
 **I do not recommend you develop against the X/Twitter API in general due to the instability of the platform and its management.**
 
-Original documentation follows - may be outdated
-------------------------------------------------
+Original documentation follows
+------------------------------
+
+**The documentation from this point has been minimally updated and may be outdated in parts!**
 
 **[Changelog](https://github.com/J7mbo/twitter-api-php/wiki/Changelog)** ||
 **[Examples](https://github.com/J7mbo/twitter-api-php/wiki/Twitter-API-PHP-Wiki)** ||
@@ -42,7 +44,7 @@ require_once('TwitterAPIExchange.php');
 **Via Composer:**
 
 ```bash
-composer require j7mbo/twitter-api-php
+composer require tzlion/deadend-api-php
 ```
 
 How To Use
@@ -77,10 +79,19 @@ $postfields = array(
 
 #### Perform the request! ####
 
+For v1.1 endpoints
 ```php
 $twitter = new TwitterAPIExchange($settings);
 echo $twitter->buildOauth($url, $requestMethod)
     ->setPostfields($postfields)
+    ->performRequest();
+```
+
+For V2 endpoints (JSON POST request)
+```php
+$twitter = new TwitterAPIExchange($settings);
+echo $twitter->buildOauth($url, $requestMethod)
+    ->setPostfields($postfields, true)
     ->performRequest();
 ```
 
